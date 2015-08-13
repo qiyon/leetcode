@@ -10,11 +10,11 @@ struct qy_hash_node{
     int key;
     int val;
     struct qy_hash_node * next  ;
-}
+};
 
 struct qy_hash_table{
     struct qy_hash_node * listNode[QY_HASH_TABLE_MAX]  ;
-}
+};
 //statement functions
 struct qy_hash_node * newNode(int key, int val);
 struct qy_hash_table * newTable();
@@ -27,7 +27,7 @@ int destroyTable(struct qy_hash_table * table);
 struct qy_hash_node * newNode(int key, int val)
 {
     struct qy_hash_node * node;
-    node = (struct qy_hash_node *)molloc(sizeof(struct qy_hash_node));
+    node = (struct qy_hash_node *)malloc(sizeof(struct qy_hash_node));
     node->key = key;
     node->val = val;
     node->next = NULL;
@@ -38,7 +38,7 @@ struct qy_hash_table * newTable()
 {
     struct qy_hash_table * table;
     int i;
-    table = (struct qy_hash_table *)molloc(sizeof(struct qy_hash_table));
+    table = (struct qy_hash_table *)malloc(sizeof(struct qy_hash_table));
     for(i = 0; i < QY_HASH_TABLE_MAX ; i++){
         table->listNode[i] = NULL;
     }
@@ -47,6 +47,7 @@ struct qy_hash_table * newTable()
 
 int hashIntKey(int key)
 {
+    if (key < 0) key = -key;
     return key % QY_HASH_TABLE_MAX;
 }
 
@@ -90,9 +91,22 @@ int tableGetByKey(struct qy_hash_table * table, int key)
 
 int destroyTable(struct qy_hash_table * table)
 {
-    //todo
+    int i ;
+    struct qy_hash_node * delNode;
+    struct qy_hash_node * mark;
+    for (i = 0; i < QY_HASH_TABLE_MAX; i++){
+        if (table->listNode[i] != NULL){
+            delNode = table->listNode[i];
+            while(delNode != NULL){
+                mark = delNode;
+                delNode = delNode->next;
+                free(mark);
+            }
+        }
+    }
+    free(table);
+    return 0;
 }
-
 
 int* setReturn(int index1, int index2)
 {
@@ -104,7 +118,20 @@ int* setReturn(int index1, int index2)
 
 int* twoSum(int* nums, int numsSize, int target)
 {
-    //todo
+    struct qy_hash_table * d ;
+    int i, diff, dictGet;
+    d = newTable();
+    for(i = 0; i < numsSize; i++){
+        diff = target - (*(nums+i));
+        dictGet = tableGetByKey(d, diff);
+        if ( dictGet == -1){
+            tableSetVal(d, *(nums+i), i);
+        } else {
+            destroyTable(d);
+            return setReturn(dictGet, i);
+        }
+    }
+    destroyTable(d);
     return setReturn(0, 0);
 }
 //leetcode submissions end --------------------------------
@@ -112,8 +139,8 @@ int* twoSum(int* nums, int numsSize, int target)
 
 int main()
 {
-    int nums[] = {4,5,11,15};
+    int nums[] = {0,3,0,0};
     int * retAnwser ;
-    retAnwser = twoSum(nums, 4, 9);
+    retAnwser = twoSum(nums, 4, 0);
     printf("index1=%d index2=%d\n", *retAnwser,*(retAnwser+1));
 }
