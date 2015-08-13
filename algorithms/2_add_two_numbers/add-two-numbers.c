@@ -19,6 +19,7 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
         firstVal = firstVal % 10;
         newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
         newNode->val = firstVal;
+        newNode->next = NULL;
         if (sumHead == NULL){
             sumHead = newNode;
             sumEnd = newNode;
@@ -33,12 +34,49 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     return sumHead;
 }
 
+struct ListNode* newList(int arr[], int length)
+{
+    int i ;
+    struct ListNode * sumHead=NULL ;
+    struct ListNode * sumEnd=NULL ;
+    struct ListNode * newNode ;
+    for(i = 0; i < length; i++){
+        newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->val = arr[i];
+        newNode->next = NULL;
+        if (sumHead == NULL){
+            sumHead = newNode;
+            sumEnd = newNode;
+        }else{
+            sumEnd->next = newNode;
+            sumEnd = sumEnd->next;
+        }
+    }
+    return sumHead;
+}
+int printList(struct ListNode * listHead)
+{
+    while(listHead){
+        printf("%d,", listHead->val);
+        listHead = listHead->next;
+    }
+}
+
 int main(){
-    struct ListNode *hehe;
-    struct ListNode a = {9, NULL};
-    struct ListNode b = {4, NULL};
-    struct ListNode c = {1, NULL};
-    a.next = &c;
-    hehe = addTwoNumbers(&a, &b);
-    printf("%d,%d\n", hehe->val, hehe->next->val);
+    int a[] = {1,1,0,4,7,2,7,3,0,1 };
+    int b[] = {2,5,5,6,8,0,3,0,5,9 };
+    struct ListNode * hehe;
+    struct ListNode * hehea;
+    struct ListNode * heheb;
+
+    hehea = newList(a, 10);
+    heheb = newList(b, 10);
+    printList(hehea);
+    printf("\n");
+    printList(heheb);
+    printf("\n");
+
+    hehe = addTwoNumbers( hehea, heheb);
+    printList(hehe);
+    printf("\n");
 }
