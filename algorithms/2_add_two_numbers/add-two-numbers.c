@@ -15,8 +15,10 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
         firstVal = l1 ? l1->val : 0;
         secondVal = l2 ?  l2->val : 0;
         firstVal = firstVal + secondVal + cin;
-        cin = firstVal / 10;  //cin for next
-        firstVal = firstVal % 10;
+        //cin = firstVal / 10;  //cin for next
+        cin = (firstVal >9 ) ? 1 : 0;
+        //firstVal = firstVal % 10;
+        firstVal = cin ? firstVal - 10 : firstVal;
         newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
         newNode->val = firstVal;
         newNode->next = NULL;
