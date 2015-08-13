@@ -1,11 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
 
-/**
- *  * Note: The returned array must be malloced, assume caller calls free().
- *   */
+
+//leetcode submissions begin ----------------------------------
 int* setReturn(int index1, int index2)
 {
     int * retIndex = (int *)malloc(2 * sizeof(int));
-    *(retIndex+1) = index2+1;
+    *retIndex = index1 + 1;
+    *(retIndex+1) = index2 + 1;
     return retIndex;
 }
 
@@ -22,4 +24,14 @@ int* twoSum(int* nums, int numsSize, int target)
         }
     }
     return setReturn(0, 0);
+}
+//leetcode submissions end --------------------------------
+
+
+int main()
+{
+    int nums[] = {4,5,11,15};
+    int * retAnwser ;
+    retAnwser = twoSum(nums, 4, 9);
+    printf("index1=%d index2=%d\n", *retAnwser,*(retAnwser+1));
 }
