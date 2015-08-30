@@ -1,3 +1,4 @@
+##leetcode submission begin -----------------
 class Solution:
 	# @param {string} s
 	# @return {integer}
@@ -24,6 +25,7 @@ class Solution:
 			else:
 				retInt += later - 2 * pre
 		return retInt
+##leetcode submission end -----------------
 
 
 if __name__ == "__main__":
