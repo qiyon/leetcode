@@ -11,15 +11,16 @@ func longestValidParentheses(s string) int {
     max := 0
     dp := make([]int, s_len)
     dp[0] = 0
-    for i := 1; i < s_len-1; i++ {
+    for i := 1; i < s_len; i++ {
         if s[i] == '(' {
             dp[i] = 0
         } else {
             pre_len := dp[i - 1]
-            if s[i - 1 - pre_len] == '(' {
+            match_idx := i - 1 - pre_len
+            if match_idx >= 0 && s[match_idx] == '(' {
                 dp[i] = dp[i-1] + 2
-                if i - 1 - pre_len - 1 >= 0 {
-                    dp[i] += dp[i - 1 - pre_len - 1]
+                if match_idx - 1 >= 0 {
+                    dp[i] += dp[match_idx - 1]
                 }
             } else {
                 dp[i] = 0
@@ -34,8 +35,10 @@ func longestValidParentheses(s string) int {
 
 //leetcode end
 func main() {
-    str := ")()(()())("
-    fmt.Printf("%v \n", str)
-    max := longestValidParentheses(str)
-    fmt.Printf("%v", max)
+    test_strs := []string{"()",")(",")(()())()","()))"}
+    for _, str := range test_strs {
+        fmt.Printf("%v \n", str)
+        max := longestValidParentheses(str)
+        fmt.Printf("%v \n", max)
+    }
 }
