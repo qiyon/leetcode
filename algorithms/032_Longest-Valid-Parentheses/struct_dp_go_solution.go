@@ -43,6 +43,9 @@ func (self DpRecord) isParenthesesMatch(left_index int, right_index int) bool {
 
 func longestValidParentheses(s string) int {
 	s_len := len(s)
+	if s_len <= 1 {
+		return 0
+	}
 	record := DpRecord{src_str: s, src_len: s_len, max: 0, dp_map: make([]int, s_len)}
 	record.init()
 	record.runDp()
@@ -51,7 +54,7 @@ func longestValidParentheses(s string) int {
 
 //leetcode end
 func main() {
-	test_strs := []string{"()", ")(", ")(()())()", "()))"}
+	test_strs := []string{"", "()", ")(", ")(()())()", "()))"}
 	for _, str := range test_strs {
 		fmt.Printf("%v \n", str)
 		max := longestValidParentheses(str)
