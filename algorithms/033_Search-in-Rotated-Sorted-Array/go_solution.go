@@ -4,11 +4,14 @@ import "fmt"
 
 // Leetcode begin
 type BinarySearch struct {
-	nums   []int
-	cnt    int
-	target int
-	left   int
-	right  int
+	nums        []int
+	target      int
+	left        int
+	right       int
+	mid         int
+	left_value  int
+	mid_value   int
+	right_value int
 }
 
 func (self *BinarySearch) search() {
@@ -16,41 +19,52 @@ func (self *BinarySearch) search() {
 		if self.isEnd() {
 			break
 		}
-		mid := (self.left + self.right) / 2
-		if self.leftVal() < self.rightVal() {
-			if self.midVal(mid) > self.target {
-				self.right = mid
+		self.calcuMidAndValue()
+		if self.isAsc() {
+			if self.isTargetInLeftMid() {
+				self.right = self.mid
 			} else {
-				self.left = mid
+				self.left = self.mid
 			}
 		} else {
-			if self.midVal(mid) > self.leftVal() {
-				if self.leftVal() < self.target && self.target < self.midVal(mid) {
-					self.right = mid
+			if self.isMidInLeftAsc() {
+				if self.isTargetInLeftMid() {
+					self.right = self.mid
 				} else {
-					self.left = mid
+					self.left = self.mid
 				}
 			} else {
-				if self.midVal(mid) < self.target && self.target < self.rightVal() {
-					self.left = mid
+				if self.isTargetInMidRight() {
+					self.left = self.mid
 				} else {
-					self.right = mid
+					self.right = self.mid
 				}
 			}
 		}
 	}
 }
 
-func (self BinarySearch) leftVal() int {
-	return self.nums[self.left]
+func (self *BinarySearch) calcuMidAndValue() {
+	self.mid = (self.left + self.right) / 2
+	self.left_value = self.nums[self.left]
+	self.right_value = self.nums[self.right]
+	self.mid_value = self.nums[self.mid]
 }
 
-func (self BinarySearch) rightVal() int {
-	return self.nums[self.right]
+func (self BinarySearch) isAsc() bool {
+	return self.left_value < self.right_value
 }
 
-func (self BinarySearch) midVal(mid int) int {
-	return self.nums[mid%self.cnt]
+func (self BinarySearch) isMidInLeftAsc() bool {
+	return self.mid_value > self.left_value
+}
+
+func (self BinarySearch) isTargetInLeftMid() bool {
+	return self.left_value < self.target && self.target < self.mid_value
+}
+
+func (self BinarySearch) isTargetInMidRight() bool {
+	return self.mid_value < self.target && self.target < self.right_value
 }
 
 func (self BinarySearch) isEnd() bool {
@@ -61,7 +75,7 @@ func (self BinarySearch) isEnd() bool {
 	}
 }
 
-func (self *BinarySearch) targetIndex() int {
+func (self BinarySearch) targetIndex() int {
 	if self.nums[self.left] == self.target {
 		return self.left
 	}
@@ -76,7 +90,7 @@ func search(nums []int, target int) int {
 	if cnt == 0 {
 		return -1
 	}
-	bin_search := BinarySearch{nums: nums, cnt: cnt, target: target, left: 0, right: cnt - 1}
+	bin_search := BinarySearch{nums: nums, target: target, left: 0, right: cnt - 1}
 	bin_search.search()
 	return bin_search.targetIndex()
 }
