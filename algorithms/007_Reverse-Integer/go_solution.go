@@ -12,8 +12,8 @@ func main() {
 		x      int
 		should int
 	}{
-		{x: 123, should: 321},
-		{x: -120, should: -21},
+		{x: -123, should: -321},
+		{x: 120, should: 21},
 		{x: 2147483647, should: 0},
 		{x: 2147483641, should: 0},
 		{x: -2147483648, should: 0},
@@ -22,7 +22,7 @@ func main() {
 
 	for _, c := range cases {
 		out := reverse(c.x)
-		fmt.Printf("Input: x = %d\nOutput: %d \nShould: %d \n\n", c.x, out, c.should)
+		fmt.Printf("Input: x = %d \nOutput: %d \nShould: %d \n\n", c.x, out, c.should)
 	}
 }
 
@@ -34,13 +34,13 @@ func reverse(x int) int {
 	}
 
 	var (
-		maxValid     = []int{2, 1, 4, 7, 4, 8, 3, 6, 4, 7}
-		posNeg   int = 1
-		outNums      = []int{}
+		maxNums     = []int{2, 1, 4, 7, 4, 8, 3, 6, 4, 7}
+		symbol  int = 1
+		outNums []int
 	)
 
 	if x < 0 {
-		posNeg = -1
+		symbol = -1
 		x = -x
 	}
 
@@ -50,12 +50,12 @@ func reverse(x int) int {
 		x = (x - item) / 10
 	}
 
-	if len(outNums) >= len(maxValid) {
+	if len(outNums) >= len(maxNums) {
 		for i, v := range outNums {
-			if v < maxValid[i] {
+			if v < maxNums[i] {
 				break
 			}
-			if v > maxValid[i] {
+			if v > maxNums[i] {
 				return 0
 			}
 		}
@@ -65,5 +65,5 @@ func reverse(x int) int {
 	for _, item := range outNums {
 		outVal = outVal*10 + item
 	}
-	return posNeg * outVal
+	return symbol * outVal
 }
