@@ -8,7 +8,7 @@ type info struct {
 	need   int
 }
 
-func longestValidParentheses(s string) int {
+func longestValidParentheses_bad(s string) int {
 	s_len := len(s)
 	if s_len <= 1 {
 		return 0
@@ -50,6 +50,6 @@ func longestValidParentheses(s string) int {
 //leetcode end
 func main() {
 	str := ")()(()())("
-	max := longestValidParentheses(str)
+	max := longestValidParentheses_bad(str)
 	fmt.Printf("%v", max)
 }

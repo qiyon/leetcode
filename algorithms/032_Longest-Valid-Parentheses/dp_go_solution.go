@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 //leetcode begin
-func longestValidParentheses(s string) int {
+func longestValidParentheses_dp(s string) int {
     s_len := len(s)
     if s_len <= 1 {
         return 0
@@ -38,7 +38,7 @@ func main() {
     test_strs := []string{"()",")(",")(()())()","()))"}
     for _, str := range test_strs {
         fmt.Printf("%v \n", str)
-        max := longestValidParentheses(str)
+        max := longestValidParentheses_dp(str)
         fmt.Printf("%v \n", max)
     }
 }
