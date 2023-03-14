@@ -34,7 +34,6 @@ func reverse(x int) int {
 	}
 
 	var (
-		maxNums     = []int{2, 1, 4, 7, 4, 8, 3, 6, 4, 7}
 		symbol  int = 1
 		outNums []int
 	)
@@ -50,6 +49,7 @@ func reverse(x int) int {
 		x = (x - item) / 10
 	}
 
+	maxNums := []int{2, 1, 4, 7, 4, 8, 3, 6, 4, 7}
 	if len(outNums) >= len(maxNums) {
 		for i, v := range outNums {
 			if v < maxNums[i] {
