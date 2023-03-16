@@ -2,7 +2,14 @@ package main
 
 import "fmt"
 
-//--leetcode begin
+func main() {
+	nums := []int{1, 2, 3, 4}
+	nextPermutation(nums)
+	fmt.Printf("%v \n", nums)
+}
+
+// leetcode start
+
 func nextPermutation(nums []int) {
 	cnt := len(nums)
 	if cnt <= 1 {
@@ -17,14 +24,14 @@ func nextPermutation(nums []int) {
 			break
 		}
 	}
-	exchange_idx := plode + 1
+	exchangeIdx := plode + 1
 	for i := plode + 1; i < cnt; i++ {
-		if nums[i] > hiil && nums[i] <= nums[exchange_idx] {
-			exchange_idx = i
+		if nums[i] > hiil && nums[i] <= nums[exchangeIdx] {
+			exchangeIdx = i
 		}
 	}
 	//swap
-	nums[plode], nums[exchange_idx] = nums[exchange_idx], nums[plode]
+	nums[plode], nums[exchangeIdx] = nums[exchangeIdx], nums[plode]
 	intSort(nums, plode+1, cnt-1)
 }
 
@@ -47,13 +54,4 @@ func intSort(nums []int, left int, right int) {
 	nums[head] = mid
 	intSort(nums, left, head-1)
 	intSort(nums, head+1, right)
-}
-
-//--leetcode end
-func main() {
-	nums := []int{1, 2, 3, 4}
-	for i := 0; i < 100; i++ {
-		nextPermutation(nums)
-		fmt.Printf("%v \n", nums)
-	}
 }
