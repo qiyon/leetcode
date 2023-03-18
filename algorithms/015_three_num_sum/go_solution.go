@@ -73,12 +73,12 @@ func threeSum(nums []int) [][]int {
 func partition(list []int, i, j int) int {
 	pivot := list[i]
 	for i < j {
-		if i < j && list[j] >= pivot {
+		for i < j && list[j] >= pivot {
 			j--
 		}
 		list[i] = list[j]
 
-		if i < j && list[i] <= pivot {
+		for i < j && list[i] <= pivot {
 			i++
 		}
 		list[j] = list[i]
