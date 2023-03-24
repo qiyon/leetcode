@@ -1,6 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+func main() {
+	var nums = []int{1, 1, 2, 3, 3, 4, 5, 5, 9, 10, 10, 10, 12, 15, 15, 16}
+	cases := []struct {
+		nums   []int
+		target int
+		should []int
+	}{
+		{nums: nums, target: 1, should: []int{0, 1}},
+		{nums: nums, target: 20, should: []int{-1, -1}},
+		{nums: []int{2, 2}, target: 2, should: []int{0, 1}},
+	}
+
+	for _, c := range cases {
+		out := searchRange(c.nums, c.target)
+		fmt.Printf("nums: %v, target: %v \nshould: %v, out: %v \n\n", c.nums, c.target, c.should, out)
+	}
+}
 
 //leetcode start
 
@@ -44,7 +64,7 @@ func findL(nums []int, target int) int {
 }
 
 func isTargetLeft(nums []int, target int, index int) bool {
-	return (nums[index] == target && nums[index-1] < target)
+	return nums[index] == target && nums[index-1] < target
 }
 
 func findR(nums []int, target int, start int) int {
@@ -72,23 +92,5 @@ func findR(nums []int, target int, start int) int {
 }
 
 func isTargetRight(nums []int, target int, index int) bool {
-	return (nums[index] == target && nums[index+1] > target)
-}
-
-//leetcode start
-
-func main() {
-	var nums = []int{1, 1, 2, 3, 3, 4, 5, 5, 9, 10, 10, 10, 12, 15, 15, 16}
-	for k, val := range nums {
-		fmt.Printf("loop %v founded return: %v \n", k, searchRange(nums, val))
-	}
-	fmt.Printf("found return: %v \n", searchRange([]int{1}, 1))
-	fmt.Printf("found return: %v \n", searchRange([]int{2, 2}, 2))
-	fmt.Printf("not found return: %v \n", searchRange([]int{}, 0))
-	fmt.Printf("not found return: %v \n", searchRange([]int{1}, 0))
-	fmt.Printf("not found return: %v \n", searchRange([]int{1, 2}, 0))
-	fmt.Printf("not found return: %v \n", searchRange(nums, 0))
-	fmt.Printf("not found return: %v \n", searchRange(nums, 11))
-	fmt.Printf("not found return: %v \n", searchRange(nums, 13))
-	fmt.Printf("not found return: %v \n", searchRange(nums, 20))
+	return nums[index] == target && nums[index+1] > target
 }

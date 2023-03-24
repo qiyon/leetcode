@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-//leetcode end
 func main() {
 	testStrs := []string{"", "()", ")(", ")(()())()", "()))"}
 	for _, str := range testStrs {
@@ -12,7 +11,7 @@ func main() {
 	}
 }
 
-// leetcode begin
+// leetcode start
 
 type DpRecord struct {
 	srcStr string

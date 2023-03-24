@@ -5,9 +5,9 @@ import (
 )
 
 func main() {
-	arr := []int{4, 5, 6, 7, 0, 1, 2, 3}
-	for _, target := range arr {
-		fmt.Printf("searched index: %v \n", search(arr, target))
+	nums := []int{4, 5, 6, 7, 0, 1, 2, 3}
+	for _, target := range nums {
+		fmt.Printf("searched index: %v \n", search(nums, target))
 	}
 }
 

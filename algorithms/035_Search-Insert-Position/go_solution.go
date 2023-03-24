@@ -1,8 +1,30 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+func main() {
+	nums := []int{1, 3, 5, 6, 7, 8, 10}
+	cases := []struct {
+		nums   []int
+		target int
+	}{
+		{nums: nums, target: 0},
+		{nums: nums, target: 2},
+		{nums: nums, target: 5},
+		{nums: nums, target: 9},
+		{nums: nums, target: 11},
+	}
+
+	for _, c := range cases {
+		out := searchInsert(c.nums, c.target)
+		fmt.Printf("nums: %v, target: %v \nout: %v \n\n", c.nums, c.target, out)
+	}
+}
 
 //leetcode begin
+
 func searchInsert(nums []int, target int) int {
 	start := 0
 	end := len(nums) - 1
@@ -26,25 +48,9 @@ func searchInsert(nums []int, target int) int {
 	if nums[end] == target {
 		return end
 	}
-    if nums[end] > target {
-        return  start + 1
-    }else{
-        return end +1
-    }
-}
-//leetcode end
-
-func main() {
-    arr := []int{1, 3, 5, 6, 7, 8, 10}
-    for _, v := range arr {
-        fmt.Printf("return %v \n", searchInsert(arr, v))
-    }
-    fmt.Printf("return %v \n", searchInsert(arr, 0))
-    fmt.Printf("return %v \n", searchInsert(arr, 2))
-    fmt.Printf("return %v \n", searchInsert(arr, 4))
-    fmt.Printf("return %v \n", searchInsert(arr, 9))
-    fmt.Printf("return %v \n", searchInsert(arr, 11))
-    fmt.Printf("return %v \n", searchInsert([]int{}, 0))
-    fmt.Printf("return %v \n", searchInsert([]int{1}, 0))
-    fmt.Printf("return %v \n", searchInsert([]int{1}, 2))
+	if nums[end] > target {
+		return start + 1
+	} else {
+		return end + 1
+	}
 }
