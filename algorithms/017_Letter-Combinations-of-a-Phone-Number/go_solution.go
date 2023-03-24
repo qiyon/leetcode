@@ -46,7 +46,7 @@ func letterCombinations(digits string) []string {
 		baseLen := pushed
 
 		if letters, ok := letterMap[d]; ok {
-			// init first letter
+			// init first digit's letter
 			if baseLen == 0 {
 				for i, l := range letters {
 					out[i] = string(l)
@@ -55,7 +55,7 @@ func letterCombinations(digits string) []string {
 				continue
 			}
 
-			// copy & append next letter
+			// copy & append letter of next digit
 			for loop := 1; loop < len(letters); loop++ {
 				appendLetter := string(letters[loop])
 
