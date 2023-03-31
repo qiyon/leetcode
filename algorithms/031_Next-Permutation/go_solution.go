@@ -1,11 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	nums := []int{1, 2, 3, 4}
-	nextPermutation(nums)
-	fmt.Printf("%v \n", nums)
+	cases := []struct {
+		nums []int
+	}{
+		{nums: []int{1, 2, 3}},
+		{nums: []int{3, 2, 1}},
+		{nums: []int{1, 1, 5}},
+		{nums: []int{1, 2, 3, 4}},
+	}
+
+	for _, c := range cases {
+		fmt.Printf("Input: nums = %v\n", c.nums)
+		nextPermutation(c.nums)
+		fmt.Printf("Output: %v \n\n", c.nums)
+	}
 }
 
 // leetcode start
@@ -15,6 +28,7 @@ func nextPermutation(nums []int) {
 	if cnt <= 1 {
 		return
 	}
+
 	plode := 0
 	hiil := 0
 	for i := cnt - 1; i > 0; i-- {
@@ -30,6 +44,7 @@ func nextPermutation(nums []int) {
 			exchangeIdx = i
 		}
 	}
+
 	//swap
 	nums[plode], nums[exchangeIdx] = nums[exchangeIdx], nums[plode]
 	intSort(nums, plode+1, cnt-1)

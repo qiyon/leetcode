@@ -1,13 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	testStrs := []string{"", "()", ")(", ")(()())()", "()))"}
-	for _, str := range testStrs {
-		fmt.Printf("%v \n", str)
-		max := longestValidParentheses(str)
-		fmt.Printf("%v \n", max)
+	cases := []struct {
+		s string
+	}{
+		{s: ""},
+		{s: "()"},
+		{s: ")("},
+		{s: ")(()())()"},
+		{s: "()))"},
+	}
+
+	for _, c := range cases {
+		out := longestValidParentheses(c.s)
+		fmt.Printf("Input: s = \"%s\" \nOutput: %d \n\n", c.s, out)
 	}
 }
 
