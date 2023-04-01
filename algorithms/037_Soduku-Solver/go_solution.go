@@ -4,7 +4,53 @@ import (
 	"fmt"
 )
 
-//leetcode begin
+func main() {
+	var soduku = [][]byte{
+		[]byte("..9748..."),
+		[]byte("7........"),
+		[]byte(".2.1.9..."),
+		[]byte("..7...24."),
+		[]byte(".64.1.59."),
+		[]byte(".98...3.."),
+		[]byte("...8.3.2."),
+		[]byte("........6"),
+		[]byte("...2759.."),
+	}
+	// soduku = [][]byte{
+	// 	[]byte("........."),
+	// 	[]byte("........."),
+	// 	[]byte("........."),
+	// 	[]byte("........."),
+	// 	[]byte("........."),
+	// 	[]byte("........."),
+	// 	[]byte("........."),
+	// 	[]byte("........."),
+	// 	[]byte("........."),
+	// }
+	solveSudoku(soduku)
+	for _, row := range soduku {
+		for _, val := range row {
+			fmt.Printf(string(rune(val)))
+			fmt.Printf(" ")
+		}
+		fmt.Printf("\n")
+	}
+}
+
+func (d dfs) debug(now_i int, now_j int, c byte) {
+	fmt.Printf("now_i: %v, now_j:%v, byte:%v \n", now_i, now_j, c-byte('0'))
+	fmt.Printf("i: %v, j:%v \n", d.i, d.j)
+	for _, row := range d.b {
+		for _, val := range row {
+			fmt.Printf(string(rune(val)))
+			fmt.Printf(" ")
+		}
+		fmt.Printf("\n")
+	}
+	fmt.Printf("------------------\n")
+}
+
+// leetcode start
 
 func solveSudoku(board [][]byte) {
 	d := new(dfs)
@@ -108,52 +154,4 @@ func (d dfs) foundMat(i int, j int) int {
 		}
 	}
 	return mat
-}
-
-//leetcode end
-
-func (d dfs) debug(now_i int, now_j int, c byte) {
-	fmt.Printf("now_i: %v, now_j:%v, byte:%v \n", now_i, now_j, c-byte('0'))
-	fmt.Printf("i: %v, j:%v \n", d.i, d.j)
-	for _, row := range d.b {
-		for _, val := range row {
-			fmt.Printf(string(rune(val)))
-			fmt.Printf(" ")
-		}
-		fmt.Printf("\n")
-	}
-	fmt.Printf("------------------\n")
-}
-
-func main() {
-	var soduku = [][]byte{
-		[]byte("..9748..."),
-		[]byte("7........"),
-		[]byte(".2.1.9..."),
-		[]byte("..7...24."),
-		[]byte(".64.1.59."),
-		[]byte(".98...3.."),
-		[]byte("...8.3.2."),
-		[]byte("........6"),
-		[]byte("...2759.."),
-	}
-	// soduku = [][]byte{
-	// 	[]byte("........."),
-	// 	[]byte("........."),
-	// 	[]byte("........."),
-	// 	[]byte("........."),
-	// 	[]byte("........."),
-	// 	[]byte("........."),
-	// 	[]byte("........."),
-	// 	[]byte("........."),
-	// 	[]byte("........."),
-	// }
-	solveSudoku(soduku)
-	for _, row := range soduku {
-		for _, val := range row {
-			fmt.Printf(string(rune(val)))
-			fmt.Printf(" ")
-		}
-		fmt.Printf("\n")
-	}
 }

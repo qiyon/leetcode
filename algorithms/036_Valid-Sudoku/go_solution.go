@@ -4,7 +4,22 @@ import (
 	"fmt"
 )
 
-//leetcode begin
+func main() {
+	var soduku = [][]byte{
+		[]byte(".87654321"),
+		[]byte("2........"),
+		[]byte("3........"),
+		[]byte("4........"),
+		[]byte("5........"),
+		[]byte("6........"),
+		[]byte("7........"),
+		[]byte("8........"),
+		[]byte("9........"),
+	}
+	fmt.Printf("return %v \n", isValidSudoku(soduku))
+}
+
+// leetcode start
 
 func isValidSudoku(board [][]byte) bool {
 	var rowHash = [9]map[byte]int{{}, {}, {}, {}, {}, {}, {}, {}, {}}
@@ -38,21 +53,4 @@ func isValidSudoku(board [][]byte) bool {
 		}
 	}
 	return true
-}
-
-//leectcode end
-
-func main() {
-	var soduku = [][]byte{
-		[]byte(".87654321"),
-		[]byte("2........"),
-		[]byte("3........"),
-		[]byte("4........"),
-		[]byte("5........"),
-		[]byte("6........"),
-		[]byte("7........"),
-		[]byte("8........"),
-		[]byte("9........"),
-	}
-	fmt.Printf("return %v \n", isValidSudoku(soduku))
 }
