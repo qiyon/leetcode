@@ -1,8 +1,25 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//leetcode begin
+func main() {
+	cases := []int{5}
+	for _, c := range cases {
+		out := solveNQueens(c)
+		fmt.Printf("Input: n = %d\nOutput: \n", c)
+		for _, r := range out {
+			for _, row := range r {
+				fmt.Printf("%v\n", row)
+			}
+			fmt.Println()
+		}
+		fmt.Println()
+	}
+}
+
+// leetcode start
 
 func solveNQueens(n int) [][]string {
 	if n == 1 {
@@ -95,16 +112,4 @@ func (s *stat) addQueen(col int) {
 
 func (s *stat) pop() {
 	s.theLength--
-}
-
-//leetcode end
-
-func main() {
-	res := solveNQueens(5)
-	for _, one := range res {
-		for _, line := range one {
-			fmt.Printf("%v\n", line)
-		}
-		fmt.Printf("\n")
-	}
 }

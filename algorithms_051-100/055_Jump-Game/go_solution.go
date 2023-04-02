@@ -1,8 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//leetcode begin
+func main() {
+	cases := []struct {
+		nums []int
+	}{
+		{nums: []int{2, 3, 1, 1, 4}},
+		{nums: []int{3, 2, 1, 0, 4}},
+	}
+	for _, c := range cases {
+		fmt.Printf("Input: nums= %v\nOutput:%v\n\n", c.nums, canJump(c.nums))
+	}
+}
+
+// leetcode start
 
 func canJump(nums []int) bool {
 	theLength := len(nums)
@@ -16,11 +30,4 @@ func canJump(nums []int) bool {
 		}
 	}
 	return last <= 0
-}
-
-//leetcode end
-
-func main() {
-	fmt.Printf("%v\n", canJump([]int{2, 3, 1, 1, 4}))
-	fmt.Printf("%v\n", canJump([]int{3, 2, 1, 0, 4}))
 }

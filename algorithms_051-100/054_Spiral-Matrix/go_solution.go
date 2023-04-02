@@ -4,7 +4,50 @@ import (
 	"fmt"
 )
 
-//leetcode begin
+func main() {
+	cases := []struct {
+		matrix [][]int
+	}{
+		{matrix: [][]int{
+			{1},
+		}},
+		{matrix: [][]int{
+			{1, 2, 3},
+		}},
+		{matrix: [][]int{
+			{1},
+			{2},
+			{3},
+		}},
+		{matrix: [][]int{
+			{1, 2, 3},
+			{4, 5, 6},
+			{7, 8, 9},
+		}},
+		{matrix: [][]int{
+			{1, 2, 3, 4},
+			{5, 6, 7, 8},
+			{9, 10, 11, 12},
+			{13, 14, 15, 16},
+		}},
+		{matrix: [][]int{
+			{1, 2, 3, 4},
+			{5, 6, 7, 8},
+		}},
+		{matrix: [][]int{
+			{1, 2, 3},
+			{4, 5, 6},
+			{7, 8, 9},
+			{10, 11, 12},
+		}},
+	}
+	for _, c := range cases {
+		out := spiralOrder(c.matrix)
+		fmt.Printf("Input: matrix= %v\nOutput:%v\n\n", c.matrix, out)
+	}
+}
+
+// leetcode start
 
 func spiralOrder(matrix [][]int) []int {
 	n := len(matrix)
@@ -58,48 +101,4 @@ type res struct {
 func (r *res) add(val int) {
 	r.list[r.index] = val
 	r.index++
-}
-
-//leetcode end
-
-func main() {
-	test11 := [][]int{
-		{1},
-	}
-	fmt.Printf("%v\n", spiralOrder(test11))
-	test13 := [][]int{
-		{1, 2, 3},
-	}
-	fmt.Printf("%v\n", spiralOrder(test13))
-	test31 := [][]int{
-		{1},
-		{2},
-		{3},
-	}
-	fmt.Printf("%v\n", spiralOrder(test31))
-	matrix := [][]int{
-		{1, 2, 3},
-		{4, 5, 6},
-		{7, 8, 9},
-	}
-	fmt.Printf("%v\n", spiralOrder(matrix))
-	matrix2 := [][]int{
-		{1, 2, 3, 4},
-		{5, 6, 7, 8},
-		{9, 10, 11, 12},
-		{13, 14, 15, 16},
-	}
-	fmt.Printf("%v\n", spiralOrder(matrix2))
-	matrix3 := [][]int{
-		{1, 2, 3, 4},
-		{5, 6, 7, 8},
-	}
-	fmt.Printf("%v\n", spiralOrder(matrix3))
-	matrix4 := [][]int{
-		{1, 2, 3},
-		{4, 5, 6},
-		{7, 8, 9},
-		{10, 11, 12},
-	}
-	fmt.Printf("%v\n", spiralOrder(matrix4))
 }

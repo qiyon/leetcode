@@ -1,8 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//leetcode begin
+func main() {
+	cases := []int{1, 3, 4, 6, 8, 10}
+	for _, c := range cases {
+		out := totalNQueens(c)
+		fmt.Printf("Input: n = %d\nOutput: %d\n\n", c, out)
+	}
+}
+
+// leetcode start
 
 func totalNQueens(n int) int {
 	if n == 1 {
@@ -71,15 +81,4 @@ func (s *stat) addQueen(col int) {
 
 func (s *stat) pop() {
 	s.theLength--
-}
-
-//leetcode end
-
-func main() {
-	fmt.Printf("total N-Queens is: %v\n", totalNQueens(1))
-	fmt.Printf("total N-Queens is: %v\n", totalNQueens(3))
-	fmt.Printf("total N-Queens is: %v\n", totalNQueens(4))
-	fmt.Printf("total N-Queens is: %v\n", totalNQueens(6))
-	fmt.Printf("total N-Queens is: %v\n", totalNQueens(8))
-	fmt.Printf("total N-Queens is: %v\n", totalNQueens(10))
 }

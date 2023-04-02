@@ -1,8 +1,25 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//leetcode begin
+func main() {
+	cases := []struct {
+		nums []int
+	}{
+		{nums: []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}},
+		{nums: []int{1}},
+		{nums: []int{5, 4, -1, 7, 8}},
+		{nums: []int{1, 2, 3, 4}},
+	}
+	for _, c := range cases {
+		out := maxSubArray(c.nums)
+		fmt.Printf("Input: nums = %v\nOutput: %v\n\n", c.nums, out)
+	}
+}
+
+// leetcode start
 
 func maxSubArray(nums []int) int {
 	theLength := len(nums)
@@ -23,11 +40,4 @@ func maxSubArray(nums []int) int {
 		}
 	}
 	return max
-}
-
-//leetcode end
-
-func main() {
-	fmt.Printf("%v\n", maxSubArray([]int{1, 2, 3, 4}))
-	fmt.Printf("%v\n", maxSubArray([]int{-2, 1, -3, 4, -1, 2, 1, -5, 4}))
 }
