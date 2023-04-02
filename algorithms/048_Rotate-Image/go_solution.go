@@ -1,8 +1,47 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//leetcode begin
+func main() {
+	cases := []struct {
+		src [][]int
+	}{
+		{
+			src: [][]int{
+				{1, 2, 3, 4},
+				{5, 6, 7, 8},
+				{9, 10, 11, 12},
+				{13, 14, 15, 16},
+			},
+		},
+		{
+			src: [][]int{
+				{5, 1, 9, 11},
+				{2, 4, 8, 10},
+				{13, 3, 6, 7},
+				{15, 14, 12, 16},
+			},
+		},
+	}
+	for _, c := range cases {
+		fmt.Printf("Input:\n")
+		for _, row := range c.src {
+			fmt.Printf("%v\n", row)
+		}
+
+		rotate(c.src)
+
+		fmt.Printf("Output:\n")
+		for _, row := range c.src {
+			fmt.Printf("%v\n", row)
+		}
+		fmt.Println()
+	}
+}
+
+// leetcode start
 
 func rotate(matrix [][]int) {
 	l := new(loop)
@@ -32,28 +71,4 @@ func (l *loop) loopRun(row int, start int, end int) {
 		}
 	}
 	l.loopRun(row+1, start+1, end-1)
-}
-
-//leetcode end
-
-func main() {
-	src := [][]int{
-		{1, 2, 3},
-		{4, 5, 6},
-		{7, 8, 9},
-	}
-	rotate(src)
-	for _, row := range src {
-		fmt.Printf("%v\n", row)
-	}
-	src2 := [][]int{
-		{1, 2, 3, 4},
-		{5, 6, 7, 8},
-		{9, 10, 11, 12},
-		{13, 14, 15, 16},
-	}
-	rotate(src2)
-	for _, row := range src2 {
-		fmt.Printf("%v\n", row)
-	}
 }

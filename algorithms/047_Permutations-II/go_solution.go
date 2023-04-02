@@ -1,8 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//leetcode begin
+func main() {
+	cases := []struct {
+		nums []int
+	}{
+		{nums: []int{1, 1, 2}},
+		{nums: []int{1, 2, 3}},
+		{nums: []int{}},
+		{nums: []int{1}},
+		{nums: []int{1, 1, 1, 1, 1, 1}},
+		{nums: []int{1, 1, 1, 1, 2, 1, 1, 1, 1}},
+		{nums: []int{1, 2, 3, 4}},
+		{nums: []int{3, 6, 9}},
+	}
+	for _, c := range cases {
+		out := permuteUnique(c.nums)
+		fmt.Printf("Input: nums = %v\nOutput: %v\n\n", c.nums, out)
+	}
+}
+
+// leetcode start
 
 func permuteUnique(nums []int) [][]int {
 	c := new(calc)
@@ -99,17 +120,4 @@ func (t *outTmp) add(val int) {
 
 func (t *outTmp) pop() {
 	t.theLength--
-}
-
-//leetcode end
-
-func main() {
-	fmt.Printf("%v \n", permuteUnique([]int{}))
-	fmt.Printf("%v \n", permuteUnique([]int{1}))
-	fmt.Printf("%v \n", permuteUnique([]int{1, 1, 2}))
-	fmt.Printf("%v \n", permuteUnique([]int{1, 1, 1, 1, 1, 1}))
-	fmt.Printf("%v \n", permuteUnique([]int{1, 1, 1, 1, 2, 1, 1, 1, 1}))
-	fmt.Printf("%v \n", permuteUnique([]int{1, 2, 3}))
-	fmt.Printf("%v \n", permuteUnique([]int{1, 2, 3, 4}))
-	fmt.Printf("%v \n", permuteUnique([]int{3, 6, 9}))
 }

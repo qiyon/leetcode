@@ -4,7 +4,23 @@ import (
 	"fmt"
 )
 
-//leetcode begin
+func main() {
+	cases := []struct {
+		height []int
+	}{
+		{height: []int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}},
+		{height: []int{4, 2, 0, 3, 2, 5}},
+		{height: []int{}},
+		{height: []int{100, 2, 3, 4, 5, 6, 6, 5, 4, 2, 3, 2, 1}},
+	}
+
+	for _, c := range cases {
+		out := trap(c.height)
+		fmt.Printf("Input: height = %v\nOutput: %d\n\n", c.height, out)
+	}
+}
+
+// leetcode start
 
 func trap(height []int) int {
 	f := new(finder)
@@ -23,51 +39,43 @@ type finder struct {
 
 func (f *finder) calc(l int, r int) {
 	if l < r-1 {
-		var maxIndex int
-		var secondIndex int
+		var firstHIndex int
+		var secondHIndex int
 		if f.height[l] > f.height[l+1] {
-			maxIndex = l
-			secondIndex = l + 1
+			firstHIndex = l
+			secondHIndex = l + 1
 		} else {
-			maxIndex = l + 1
-			secondIndex = l
+			firstHIndex = l + 1
+			secondHIndex = l
 		}
 		for i := l + 2; i <= r; i++ {
-			if f.height[i] > f.height[secondIndex] {
-				if f.height[i] > f.height[maxIndex] {
-					secondIndex = maxIndex
-					maxIndex = i
+			if f.height[i] > f.height[secondHIndex] {
+				if f.height[i] > f.height[firstHIndex] {
+					secondHIndex = firstHIndex
+					firstHIndex = i
 				} else {
-					secondIndex = i
+					secondHIndex = i
 				}
-				//fmt.Printf("maxIndex: %v, secondIndex: %v \n", maxIndex, secondIndex)
 			}
 		}
-		waterHeight := f.height[secondIndex]
+
+		waterHeight := f.height[secondHIndex]
 		var nextL int
 		var nextR int
-		if maxIndex < secondIndex {
-			nextL = maxIndex
-			nextR = secondIndex
+		if firstHIndex < secondHIndex {
+			nextL = firstHIndex
+			nextR = secondHIndex
 		} else {
-			nextL = secondIndex
-			nextR = maxIndex
+			nextL = secondHIndex
+			nextR = firstHIndex
 		}
-		//fmt.Printf("nextL: %v, nextR: %v \n", nextL, nextR)
+
 		for j := nextL; j <= nextR; j++ {
 			if f.height[j] < waterHeight {
-				f.cnt += (waterHeight - f.height[j])
+				f.cnt += waterHeight - f.height[j]
 			}
 		}
 		f.calc(l, nextL)
 		f.calc(nextR, r)
 	}
-}
-
-//leetcode end
-
-func main() {
-	fmt.Printf("return %v \n", trap([]int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}))
-	fmt.Printf("return %v \n", trap([]int{}))
-	fmt.Printf("return %v \n", trap([]int{100, 2, 3, 4, 5, 6, 6, 5, 4, 2, 3, 2, 1}))
 }

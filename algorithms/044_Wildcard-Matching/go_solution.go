@@ -1,14 +1,41 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//leetcoe begin
+func main() {
+	in := [][]string{
+		{"abcd", "ab*d"},
+		{"a", "*"},
+		{"0cvd", "??*"},
+		{"sdf", "sdf"},
+		{"sdfs", "***?"},
+		{"44", "??"},
+		{"", "***"},
+		{"axxbcd", "axxbcd*"},
+		{"a", "?*"},
+		{"c", "*?*"},
+		{"abcd", "a*bdc"},
+		{"axxbcd", "a*c"},
+		{"axxbcd", "axxbcd*cd"},
+		{
+			"babbbbaabababaabbababaababaabbaabababbaaababbababaaaaaabbabaaaabababbabbababbbaaaababbbabbbbbbbbbbaabbb",
+			"b**bb**a**bba*b**a*bbb**aba***babbb*aa****aabb*bbb***a",
+		},
+	}
+	for _, row := range in {
+		fmt.Printf("match '%v' with '%v' result: %v \n", row[0], row[1], isMatchBad(row[0], row[1]))
+	}
+}
 
-func isMatch(s string, p string) bool {
+// leetcode start
+
+func isMatchBad(s string, p string) bool {
 	if p == "" {
 		return s == ""
 	}
-	m := new(matcher)
+	m := new(matcherBad)
 	m.s = []byte(s)
 	m.p = make([]byte, len(p))
 	m.sMaxIndex = len(m.s) - 1
@@ -37,7 +64,7 @@ func isMatch(s string, p string) bool {
 	return m.toMatch(0, 0)
 }
 
-type matcher struct {
+type matcherBad struct {
 	s         []byte
 	p         []byte
 	sMaxIndex int
@@ -45,7 +72,7 @@ type matcher struct {
 	dp        [][]bool
 }
 
-func (m *matcher) toMatch(i int, j int) bool {
+func (m *matcherBad) toMatch(i int, j int) bool {
 	//fmt.Printf("%v %v \n", i, j)
 	if m.dp[i][j] == false {
 		return false
@@ -83,33 +110,6 @@ func (m *matcher) toMatch(i int, j int) bool {
 	return false
 }
 
-func (m *matcher) recordDpFalse(i int, j int) {
+func (m *matcherBad) recordDpFalse(i int, j int) {
 	m.dp[i][j] = false
-}
-
-//leetcode end
-
-func main() {
-	in := [][]string{
-		{"abcd", "ab*d"},
-		{"a", "*"},
-		{"0cvd", "??*"},
-		{"sdf", "sdf"},
-		{"sdfs", "***?"},
-		{"44", "??"},
-		{"", "***"},
-		{"axxbcd", "axxbcd*"},
-		{"a", "?*"},
-		{"c", "*?*"},
-		{"abcd", "a*bdc"},
-		{"axxbcd", "a*c"},
-		{"axxbcd", "axxbcd*cd"},
-		{
-			"babbbbaabababaabbababaababaabbaabababbaaababbababaaaaaabbabaaaabababbabbababbbaaaababbbabbbbbbbbbbaabbb",
-			"b**bb**a**bba*b**a*bbb**aba***babbb*aa****aabb*bbb***a",
-		},
-	}
-	for _, row := range in {
-		fmt.Printf("match '%v' with '%v' result: %v \n", row[0], row[1], isMatch(row[0], row[1]))
-	}
 }

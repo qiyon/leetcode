@@ -1,34 +1,49 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//leetcode begin
+func main() {
+	cases := [][]int{
+		{10, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1},
+		{0, 0, 1},
+		{0},
+		{3, 2, 3, 4, 2, 5, 1},
+	}
+	for _, c := range cases {
+		fmt.Printf("Input: nums = %v\nOutput: %d\n\n", c, jump(c))
+	}
+}
+
+// leetcode start
 
 func jump(nums []int) int {
-	theLength := len(nums)
-	if theLength <= 1 {
+	numsLen := len(nums)
+	if numsLen <= 1 {
 		return 0
 	}
-	mins := make([]int, theLength)
-	mins[0] = 0
+
+	minOf := make([]int, numsLen)
+	minOf[0] = 0
 	hasRecordsIndex := 0
-	for i := 0; i < theLength; i++ {
+	for i := 0; i < numsLen; i++ {
 		if i > hasRecordsIndex {
 			continue
 		}
-		steps := nums[i]
-		yetStep := mins[i]
-		for k := i + 1; k <= (i+steps) && k < theLength; k++ {
+
+		iJump := nums[i]
+		minStep2I := minOf[i]
+		for k := i + 1; k <= (i+iJump) && k < numsLen; k++ {
 			if k > hasRecordsIndex {
-				//fmt.Printf("%v %v %v \n", i, k, hasRecordsIndex)
-				mins[k] = yetStep + 1
+				minOf[k] = minStep2I + 1
 				hasRecordsIndex++
 			} else {
-				mins[k] = min(mins[k], yetStep+1)
+				minOf[k] = min(minOf[k], minStep2I+1)
 			}
 		}
 	}
-	return mins[theLength-1]
+	return minOf[numsLen-1]
 }
 
 func min(i int, j int) int {
@@ -36,18 +51,4 @@ func min(i int, j int) int {
 		return i
 	}
 	return j
-}
-
-//leetcode end
-
-func main() {
-	tests := [][]int{
-		{10, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1},
-		{0, 0, 1},
-		{0},
-		{3, 2, 3, 4, 2, 5, 1},
-	}
-	for _, row := range tests {
-		fmt.Printf("jump of: %v \nresult:%v \n", row, jump(row))
-	}
 }

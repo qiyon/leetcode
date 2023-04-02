@@ -1,8 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//leetcode begin
+func main() {
+	cases := []struct {
+		nums []int
+	}{
+		{nums: []int{1, 2, 3}},
+		{nums: []int{0, 1}},
+		{nums: []int{1}},
+		{nums: []int{}},
+		{nums: []int{1, 2, 3, 4}},
+		{nums: []int{3, 6, 9}},
+	}
+	for _, c := range cases {
+		out := permute(c.nums)
+		fmt.Printf("Input: nums = %v\nOutput: %v\n\n", c.nums, out)
+	}
+}
+
+// leetcode start
 
 func permute(nums []int) [][]int {
 	c := new(calc)
@@ -78,14 +97,4 @@ func (t *outTmp) add(val int) {
 
 func (t *outTmp) pop() {
 	t.theLength--
-}
-
-//leetcode end
-
-func main() {
-	fmt.Printf("%v \n", permute([]int{}))
-	fmt.Printf("%v \n", permute([]int{1}))
-	fmt.Printf("%v \n", permute([]int{1, 2, 3}))
-	fmt.Printf("%v \n", permute([]int{1, 2, 3, 4}))
-	fmt.Printf("%v \n", permute([]int{3, 6, 9}))
 }

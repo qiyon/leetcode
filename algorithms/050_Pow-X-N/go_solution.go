@@ -1,8 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//leetcode begin
+func main() {
+	cases := []struct {
+		x float64
+		n int
+	}{
+		{x: 2.00000, n: 10},
+		{x: 2.10000, n: 3},
+		{x: 2.00000, n: -2},
+		{x: 0, n: 0},
+		{x: 100, n: 0},
+		{x: 10, n: -2},
+	}
+	for _, c := range cases {
+		out := myPow(c.x, c.n)
+		fmt.Printf("Input: x = %.5f, n = %v\nOutput: %.5f\n\n", c.x, c.n, out)
+	}
+}
+
+// leetcode start
 
 func myPow(x float64, n int) float64 {
 	if x == 0.0 {
@@ -20,14 +40,4 @@ func myPow(x float64, n int) float64 {
 	} else {
 		return x * myPow(x*x, n/2)
 	}
-}
-
-//leetcode end
-
-func main() {
-	fmt.Printf("Pow %v ^ %v ==> %v\n", 2.000, 10, myPow(2.000, 10))
-	fmt.Printf("Pow %v ^ %v ==> %v\n", 2.100, 3, myPow(2.100, 3))
-	fmt.Printf("Pow %v ^ %v ==> %v\n", 0, 0, myPow(0, 0))
-	fmt.Printf("Pow %v ^ %v ==> %v\n", 100, 0, myPow(100, 0))
-	fmt.Printf("Pow %v ^ %v ==> %v\n", 10, -2, myPow(10, -2))
 }

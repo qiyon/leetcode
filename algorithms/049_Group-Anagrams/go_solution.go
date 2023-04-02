@@ -1,8 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//leetcode begin
+func main() {
+	cases := []struct {
+		strs []string
+	}{
+		{strs: []string{"eat", "tea", "tan", "ate", "nat", "bat"}},
+		{strs: []string{"", "abc", "abcd", "acb", "bat", "bat"}},
+	}
+	for _, c := range cases {
+		out := groupAnagrams(c.strs)
+		fmt.Printf("Input: strs = %v\nOutput: %v\n\n", c.strs, out)
+	}
+}
+
+// leetcode start
 
 func groupAnagrams(strs []string) [][]string {
 	hashMap := make(map[string][]string)
@@ -16,6 +31,7 @@ func groupAnagrams(strs []string) [][]string {
 		}
 		hashMap[groupStr] = append(hashMap[groupStr], row)
 	}
+
 	res := make([][]string, 0)
 	for _, oneGroupStr := range keyOrder {
 		srcStrList := hashMap[oneGroupStr]
@@ -26,11 +42,11 @@ func groupAnagrams(strs []string) [][]string {
 
 func getGroupStr(str string) string {
 	byteList := []byte(str)
-	byteQsort(byteList)
+	byteQSort(byteList)
 	return string(byteList)
 }
 
-func byteQsort(data []byte) {
+func byteQSort(data []byte) {
 	if len(data) <= 1 {
 		return
 	}
@@ -47,13 +63,6 @@ func byteQsort(data []byte) {
 		}
 	}
 	data[head] = mid
-	byteQsort(data[:head])
-	byteQsort(data[head+1:])
-}
-
-//leetcode end
-
-func main() {
-	fmt.Printf("%v \n", groupAnagrams([]string{"eat", "tea", "tan", "ate", "nat", "bat"}))
-	fmt.Printf("%v \n", groupAnagrams([]string{"", "abc", "abcd", "acb", "bat", "bat"}))
+	byteQSort(data[:head])
+	byteQSort(data[head+1:])
 }
