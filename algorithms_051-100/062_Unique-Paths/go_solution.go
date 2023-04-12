@@ -35,7 +35,6 @@ func uniquePaths(m int, n int) int {
 	var x, y int64
 	x, y = 1, 1
 	for cr >= 1 {
-		fmt.Println(cn, cr)
 		x *= cn
 		y *= cr
 		for x%2 == 0 && y%2 == 0 {
