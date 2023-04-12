@@ -26,14 +26,13 @@ func uniquePaths(m int, n int) int {
 		return 1
 	}
 
-	cn := int64(m + n - 2)
-	cr := int64(m - 1)
+	cn := m + n - 2
+	cr := m - 1
 	if n < m {
-		cr = int64(n - 1)
+		cr = n - 1
 	}
 
-	var x, y int64
-	x, y = 1, 1
+	x, y := 1, 1
 	for cr >= 1 {
 		x *= cn
 		y *= cr
@@ -45,5 +44,5 @@ func uniquePaths(m int, n int) int {
 		cr--
 	}
 
-	return int(x / y)
+	return x / y
 }
